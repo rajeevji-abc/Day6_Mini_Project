@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<!-- Defines this as an HTML5 document -->
+<html lang="en">
+
+<head>
+    <!-- Meta information about the document encoding -->
+    <meta charset="UTF-8">
+
+    <!-- Title displayed on the browser tab -->
+    <title>Simple Greeting App</title>
+
+    <style>
+        /* Overall page styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f0f8ff;
+            /* Light blue background */
+            text-align: center;
+        }
+
+        /* Style for input and buttons */
+        input,
+        button {
+            padding: 10px;
+            margin: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 1em;
+            cursor: pointer;
+        }
+
+        button {
+            background-color: #28a745;
+            color: white;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        /* Style the greeting message */
+        .greeting {
+            margin-top: 20px;
+            font-size: 1.5em;
+            color: darkgreen;
+            font-weight: bold;
+        }
+
+        /* Style for the list of names */
+        ul {
+            margin-top: 20px;
+            list-style-type: square;
+            text-align: left;
+            display: inline-block;
+            background-color: #ffffff;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Colorful header */
+        h1 {
+            color: #1e90ff;
+            text-shadow: 1px 1px 2px gray;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Main heading -->
+    <h1>Welcome to My Fun Greeting App 🎉</h1>
+
+    <!-- Input form for entering a name -->
+    <form id="greetingForm">
+        <input type="text" id="nameInput" placeholder="Enter your name" required>
+        <button type="submit">Greet Me!</button>
+    </form>
+
+    <!-- Area where greeting message will appear -->
+    <div class="greeting" id="greetingMessage"></div>
+
+    <!-- List of all entered names -->
+    <h3>All Entered Names:</h3>
+    <ul id="nameList"></ul>
+
+    <!-- Clear All Names button placed below the name list -->
+    <button id="clearAllBtn">Clear All Names</button>
+
+    <!-- JavaScript to handle interactions -->
+    <script>
+        // Array to store entered names
+        const nameListArray = [];
+
+        // Handle form submission
+        document.getElementById('greetingForm').addEventListener('submit', function (e) {
+            e.preventDefault(); // Prevent page refresh
+
+            const name = document.getElementById('nameInput').value.trim();
+
+            if (name) {
+                // Show greeting message with emoji
+                document.getElementById('greetingMessage').textContent = '👋 Hello, ' + name + '! Welcome to our site! 🌟';
+
+                // Add name to the list array
+                nameListArray.push(name);
+
+                // Add name to the <ul>
+                const li = document.createElement('li');
+                li.textContent = name;
+                document.getElementById('nameList').appendChild(li);
+
+                // Clear the input field
+                document.getElementById('nameInput').value = '';
+            } else {
+                // Clear greeting if input is empty
+                document.getElementById('greetingMessage').textContent = '';
+            }
+        });
+
+        // Handle "Clear All Names" button click
+        document.getElementById('clearAllBtn').addEventListener('click', function () {
+            // Clear the array
+            nameListArray.length = 0;
+
+            // Clear the displayed list
+            document.getElementById('nameList').innerHTML = '';
+
+            // Clear the greeting message
+            document.getElementById('greetingMessage').textContent = '';
+        });
+    </script>
+</body>
+
+</html>
